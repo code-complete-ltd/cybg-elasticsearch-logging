@@ -1,0 +1,37 @@
+- name: Check if X-Pack is installed
+  shell: /usr/share/elasticsearch/bin/elasticsearch-plugin list | grep x-pack
+  register: xpack_installed
+  changed_when: xpack_installed.rc == 1
+  failed_when: xpack_installed.rc > 1
+  check_mode: no
+
+- name: Get X-Pack archive stats
+  stat:
+    path: "{{ xpack_archive_path }}"
+  register: xpack_archive
+  when: xpack_installed.rc == 1
+
+- name: Download X-Pack archive
+  get_url:
+    url: "{{ xpack_archive_url }}"
+    dest: "{{ xpack_archive_path }}"
+  check_mode: no
+  when: xpack_installed.rc == 1 and (xpack_archive.stat.exists == false or xpack_archive.stat.checksum != xpack_archive_checksum)
+
+- name: Install X-Pack
+  notify: Restart Elasticsearch service
+  command: "/usr/share/elasticsearch/bin/elasticsearch-plugin install --silent --batch file://{{ xpack_archive_path }}"
+  register: xpack_install
+  changed_when: xpack_install.rc == 0
+  when: xpack_installed.rc == 1
+
+- name: Copy multiple X-Pack files
+  notify: Restart Elasticsearch service
+  copy:
+    src: "{{ role_path }}/files/etc/elasticsearch/x-pack/{{ item }}"
+    dest: "/etc/elasticsearch/x-pack/{{ item }}"
+  with_items:
+    - role_mapping.yml
+    - roles.yml
+    - users
+    - users_roles

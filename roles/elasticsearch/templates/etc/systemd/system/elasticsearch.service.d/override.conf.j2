@@ -1,0 +1,6 @@
+[Service]
+Environment=DATA_DIR={{ elasticsearch_data_dir }}
+Environment=LOG_DIR={{ elasticsearch_log_dir }}
+{% if elasticsearch_memory_lock %}
+LimitMEMLOCK=infinity
+{%- endif %}

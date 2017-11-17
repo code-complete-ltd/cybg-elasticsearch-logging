@@ -1,0 +1,11 @@
+- name: Get archive stats
+  stat:
+    path: "{{ python_pip_archive_path }}"
+  register: python_pip_archive
+
+- name: Download archive
+  get_url:
+    url: "{{ python_pip_archive_url }}"
+    dest: "{{ python_pip_archive_path }}"
+  check_mode: no
+  when: python_pip_archive.stat.exists == false or python_pip_archive.stat.checksum != python_pip_archive_checksum

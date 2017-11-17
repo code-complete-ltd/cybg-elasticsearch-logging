@@ -1,0 +1,46 @@
+elasticsearch_admin_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  31366233393339316539373333363238326365396662396163623563373566633535326663346565
+  3035366563303661353234666433626433373330363636390a663034656337613330356262646363
+  63376462383838613263356465656631623036353165373131303839313432343035376235656535
+  3331663437656366610a323530396462353235326232616563316261666430363036613438353236
+  3164
+elasticsearch_admin_username: elastic
+elasticsearch_ca_certificate: |
+  -----BEGIN CERTIFICATE-----
+  MIIDmzCCAoOgAwIBAgIUYKeK+nra/+p2vaIYr9yWW/NBEBQwDQYJKoZIhvcNAQEL
+  BQAwNDEyMDAGA1UEAxMpRWxhc3RpYyBDZXJ0aWZpY2F0ZSBUb29sIEF1dG9nZW5l
+  cmF0ZWQgQ0EwHhcNMTcxMTAzMTQzMDUyWhcNMjAxMTAyMTQzMDUyWjA0MTIwMAYD
+  VQQDEylFbGFzdGljIENlcnRpZmljYXRlIFRvb2wgQXV0b2dlbmVyYXRlZCBDQTCC
+  ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKTqUHyFMpggtQWkkqv6nr68
+  jI1h30/P1hpREakTK8zHIbUnTudmX2vXKTK9GUbcFINB9DDNmhvLfXGZglpsQefi
+  hpFpcmKK8d+OMxiPhSJibaiZd5r9SUH8LeCYNtPMFPjvhjCuhodcY0ufMa5MTzFA
+  Sq66KBncn282eUrPa5xUIFzFluhew1qvJOiAbS1F1+xAkBcfEevqwDpUnMVPzgY6
+  fPWz4Qemphvon5HVxLv5HV7kCUkU7B2LPZLmeItz773ArHyIbmbDNp8GIuacXNTL
+  OaY2raQSTx0HxqJzEDesyVVlDQXD9l1hcJvSS2c81seRvw+z6GkUoGQxc+bQ208C
+  AwEAAaOBpDCBoTAdBgNVHQ4EFgQUacnjXmmPUw4qsqB5FcpKJILQl1QwbwYDVR0j
+  BGgwZoAUacnjXmmPUw4qsqB5FcpKJILQl1ShOKQ2MDQxMjAwBgNVBAMTKUVsYXN0
+  aWMgQ2VydGlmaWNhdGUgVG9vbCBBdXRvZ2VuZXJhdGVkIENBghRgp4r6etr/6na9
+  ohiv3JZb80EQFDAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQA7
+  bBH6zqkati+nJIrCMD98b3jr4Oc7h0rZtk1z8V4HLRTQvUCsgc6rPD19QEhaYPWk
+  ysQnK8Gh1ybV5LAOkXdyK97CbLAU+3E99bNXIKq5YyWm4ewm6ZHsaenR6QGyepa+
+  /ZVCjRxluJSlY7gDF21Vt3TLkmjHBLrD6ge8M+oncdxl0eEqPT46846HYzZQ7sOD
+  QPH3kgySZxrCRRAV+hFzMp4XVZCAn+/0LIbJbh57EM40jB7Zj748Xohk79pb5pnu
+  UWfYFlJleju/mhUpuUNM5WD1QEUydtlEzI+y76PMtN/ED4qPm6/ZYIYWSHIChCTH
+  pFYB/5mkvcFZEFJRDpOl
+  -----END CERTIFICATE-----
+elasticsearch_client_only: no
+elasticsearch_cluster_name: elasticsearch
+elasticsearch_data_dir: /opt/data
+elasticsearch_heap_size: 2g
+elasticsearch_http_port: 9200
+elasticsearch_hosts: "{{ groups['elasticsearch'] | map('extract', hostvars, 'ansible_default_ipv4') | map(attribute='address') | list }}"
+elasticsearch_log_dir: /var/log/elasticsearch
+elasticsearch_memory_lock: yes
+elasticsearch_minimum_master_nodes: 2
+elasticsearch_network_host: 0.0.0.0
+elasticsearch_package_checksum: 919c9f728c1f322072c07fb9b6c2f70b22a4474b
+elasticsearch_package_name: "elasticsearch-{{ elastic_stack_version }}.rpm"
+elasticsearch_package_path: "/tmp/{{ elasticsearch_package_name }}"
+elasticsearch_package_url: "{{ repository_url_root }}/{{ elasticsearch_package_name }}"
+elasticsearch_ssl_enabled: yes

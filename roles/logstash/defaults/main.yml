@@ -1,0 +1,7 @@
+logstash_enabled: no
+logstash_package_checksum: 5a42ab333200197108ad4984e145a5dd8aa4bfe5
+logstash_package_name: "logstash-{{ elastic_stack_version }}.rpm"
+logstash_package_path: "/tmp/{{ logstash_package_name }}"
+logstash_package_url: "{{ repository_url_root }}/{{ logstash_package_name }}"
+logstash_system_elasticsearch_password: changeme
+logstash_system_elasticsearch_username: logstash_system

@@ -1,0 +1,13 @@
+packages:
+  - name: python-backports-1.0-8.el7.x86_64.rpm
+    path: /tmp/python-backports-1.0-8.el7.x86_64.rpm
+    url: "{{ download_url_root }}/python-backports-1.0-8.el7.x86_64.rpm"
+    checksum: 6ac5ca32c1c4c3b2d1a1dea19b11e3c86ed84100
+  - name: python-backports-ssl_match_hostname-3.4.0.2-4.el7.noarch.rpm
+    path: /tmp/python-backports-ssl_match_hostname-3.4.0.2-4.el7.noarch.rpm
+    url: "{{ download_url_root }}/python-backports-ssl_match_hostname-3.4.0.2-4.el7.noarch.rpm"
+    checksum: cf9e7e88a35e318ff17cb5d42dce2363c3796870
+  - name: python-setuptools-0.9.8-7.el7.noarch.rpm
+    path: /tmp/python-setuptools-0.9.8-7.el7.noarch.rpm
+    url: "{{ download_url_root }}/python-setuptools-0.9.8-7.el7.noarch.rpm"
+    checksum: 0995ad14abb10442b05aa8d58a5923dc3c092fff

@@ -1,0 +1,11 @@
+- name: Get package stats
+  stat:
+    path: "{{ kibana_package_path }}"
+  register: kibana_package
+
+- name: Download package
+  get_url:
+    url: "{{ kibana_package_url }}"
+    dest: "{{ kibana_package_path }}"
+  check_mode: no
+  when: kibana_package.stat.exists == false or kibana_package.stat.checksum != kibana_package_checksum

@@ -1,0 +1,1 @@
+libselinux_python_package_url: "{{ repository_url_root }}/libselinux-python-2.0.94-7.el6.x86_64.rpm"

@@ -1,0 +1,17 @@
+- name: Copy kibana.yml template
+  notify: Restart Kibana service
+  template:
+    src: "{{ role_path }}/templates/etc/kibana/kibana.yml.j2"
+    dest: /etc/kibana/kibana.yml
+    owner: root
+    group: kibana
+    mode: 0660
+
+- name: Copy kibana.conf file
+  notify: Reload Nginx service
+  copy:
+    src: "{{ role_path }}/files/etc/nginx/conf.d/kibana.conf"
+    dest: /etc/nginx/conf.d/kibana.conf
+    owner: root
+    group: root
+    mode: 0644

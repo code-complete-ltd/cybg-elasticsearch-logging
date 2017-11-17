@@ -1,0 +1,23 @@
+- name: Copy CA certificate content
+  copy:
+    content: "{{ elasticsearch_ca_certificate }}"
+    dest: /etc/elasticsearch/x-pack/ca.crt
+    owner: root
+    group: elasticsearch
+    mode: 0660
+
+- name: Copy node certificate content
+  copy:
+    content: "{{ elasticsearch_ssl_certificate }}"
+    dest: "/etc/elasticsearch/x-pack/{{ elastic_stack_node_name }}.crt"
+    owner: root
+    group: elasticsearch
+    mode: 0660
+
+- name: Copy node key content
+  copy:
+    content: "{{ elasticsearch_ssl_key }}"
+    dest: "/etc/elasticsearch/x-pack/{{ elastic_stack_node_name }}.key"
+    owner: root
+    group: elasticsearch
+    mode: 0660

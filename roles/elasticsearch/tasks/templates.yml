@@ -1,0 +1,29 @@
+- name: Get existing Flume template
+  uri:
+    url: "https://{{ ansible_default_ipv4.address }}:9200/_template/flume"
+    method: GET
+    user: "{{ elasticsearch_admin_username }}"
+    password: "{{ elasticsearch_admin_password }}"
+    validate_certs: no
+  register: existing_flume_template
+  check_mode: no
+  failed_when: no
+  when: inventory_hostname == groups["elasticsearch"][0]
+
+- name: Load source Flume template
+  set_fact:
+    source_flume_template: "{{ lookup('file', role_path + '/artifacts/flume.json') | from_json }}"
+  when: inventory_hostname == groups["elasticsearch"][0]
+
+- name: Upload Flume template
+  uri:
+    url: "https://{{ ansible_default_ipv4.address }}:9200/_template/flume"
+    method: PUT
+    body: "{{ source_flume_template }}"
+    body_format: json
+    user: "{{ elasticsearch_admin_username }}"
+    password: "{{ elasticsearch_admin_password }}"
+    validate_certs: no
+  register: upload_flume_template
+  changed_when: upload_flume_template.json | json_query('acknowledged') == true
+  when: inventory_hostname == groups["elasticsearch"][0] and (existing_flume_template.status != 200 or (existing_flume_template.json | json_query('flume')) != source_flume_template)

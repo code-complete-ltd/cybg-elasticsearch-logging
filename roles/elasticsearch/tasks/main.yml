@@ -1,0 +1,23 @@
+- import_tasks: download.yml
+
+- import_tasks: install.yml
+
+- import_tasks: directories.yml
+
+- import_tasks: config.yml
+
+- import_tasks: scripts.yml
+
+- import_tasks: xpack.yml
+
+- import_tasks: certificates.yml
+
+- meta: flush_handlers
+
+- import_tasks: run.yml
+
+- name: Wait for service
+  wait_for:
+    port: 9200
+
+- import_tasks: templates.yml

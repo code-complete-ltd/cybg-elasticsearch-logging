@@ -1,0 +1,10 @@
+kibana_base_path: ""
+kibana_elasticsearch_host: "{{ ansible_hostname }}"
+kibana_elasticsearch_password: changeme
+kibana_elasticsearch_url: https://localhost:9200
+kibana_elasticsearch_username: kibana
+kibana_package_checksum: 9f13fb62336b8d8f6aa25f3b3a52962597d4bcc6
+kibana_package_name: "kibana-{{ elastic_stack_version }}-x86_64.rpm"
+kibana_package_path: "/tmp/{{ kibana_package_name }}"
+kibana_package_url: "{{ repository_url_root }}/{{ kibana_package_name }}"
+kibana_port: 5602

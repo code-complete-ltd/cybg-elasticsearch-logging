@@ -1,0 +1,11 @@
+- name: Get package stats
+  stat:
+    path: "{{ logstash_package_path }}"
+  register: logstash_package
+
+- name: Download package
+  get_url:
+    url: "{{ logstash_package_url }}"
+    dest: "{{ logstash_package_path }}"
+  check_mode: no
+  when: logstash_package.stat.exists == false or logstash_package.stat.checksum != logstash_package_checksum

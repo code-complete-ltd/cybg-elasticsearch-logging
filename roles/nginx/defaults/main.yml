@@ -1,0 +1,4 @@
+nginx_package_checksum: 43cc3ce0f9755b493e24070dac364672d496d077
+nginx_package_name: nginx-1.12.1-1.el7.ngx.x86_64.rpm
+nginx_package_path: "/tmp/{{ nginx_package_name }}"
+nginx_package_url: "{{ repository_url_root }}/{{ nginx_package_name }}"

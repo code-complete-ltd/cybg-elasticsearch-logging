@@ -1,0 +1,4 @@
+python_pip_archive_checksum: 57ff41e99cb01b6a1c2b0999161589b726f0ec8b
+python_pip_archive_name: pip-9.0.1.tar.gz
+python_pip_archive_path: "/tmp/{{ python_pip_archive_name }}"
+python_pip_archive_url: "{{ download_url_root }}/{{ python_pip_archive_name }}"

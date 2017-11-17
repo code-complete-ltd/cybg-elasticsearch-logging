@@ -1,0 +1,11 @@
+- name: Get package stats
+  stat:
+    path: "{{ nginx_package_path }}"
+  register: nginx_package
+
+- name: Download package
+  get_url:
+    url: "{{ nginx_package_url }}"
+    dest: "{{ nginx_package_path }}"
+  check_mode: no
+  when: nginx_package.stat.exists == false or nginx_package.stat.checksum != nginx_package_checksum

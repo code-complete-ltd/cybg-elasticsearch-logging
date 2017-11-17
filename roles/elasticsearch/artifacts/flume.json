@@ -1,0 +1,30 @@
+{
+  "order": 0,
+  "template": "flume-*",
+  "settings": {},
+  "mappings": {
+    "_default_": {
+      "dynamic_templates": [
+        {
+          "string_fields": {
+            "mapping": {
+              "type": "keyword"
+            },
+            "match_mapping_type": "string",
+            "match": "*"
+          }
+        }
+      ],
+      "properties": {
+        "@message": {
+          "norms": false,
+          "type": "text"
+        },
+        "@timestamp": {
+          "type": "date"
+        }
+      }
+    }
+  },
+  "aliases": {}
+}

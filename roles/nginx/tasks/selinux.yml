@@ -1,0 +1,14 @@
+- name: Allow Nginx to proxy requests
+  notify: Restart Nginx service
+  seboolean:
+    state: yes
+    name: httpd_can_network_connect
+    persistent: yes
+
+- name: Allow Nginx to listen on port 5601
+  notify: Restart Nginx service
+  seport:
+    state: present
+    ports: 5601
+    proto: tcp
+    setype: http_port_t

@@ -1,0 +1,8 @@
+- name: Get install directory stats
+  stat:
+    path: "/usr/lib/python2.7/site-packages/{{ python_pip_archive_name | replace('.tar.gz', '') }}-py2.7.egg"
+  register: python_pip_directory
+
+- name: Install
+  shell: "easy_install {{ python_pip_archive_path }}"
+  when: python_pip_directory.stat.exists == false

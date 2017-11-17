@@ -1,0 +1,9 @@
+modules:
+  - name: elasticsearch-5.4.0-py2.py3-none-any.whl
+    path: /tmp/elasticsearch-5.4.0-py2.py3-none-any.whl
+    url: "{{ download_url_root }}/elasticsearch-5.4.0-py2.py3-none-any.whl"
+    checksum: 0215d94d3e6b2c3c2ffcba54a84186a8aacb86df
+  - name: urllib3-1.22-py2.py3-none-any.whl
+    path: /tmp/urllib3-1.22-py2.py3-none-any.whl
+    url: "{{ download_url_root }}/urllib3-1.22-py2.py3-none-any.whl"
+    checksum: ae6715ae61c34b72d5e0c3241abfb20c2c4d1313

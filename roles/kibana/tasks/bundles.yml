@@ -1,0 +1,14 @@
+- name: Find bundle files
+  find:
+    paths: /usr/share/kibana/optimize/bundles
+    patterns: "*.css,*.js"
+  register: bundle_files
+
+- name: Set ownership for multiple files
+  notify: Restart Kibana service
+  file:
+    path: "{{ item.path }}"
+    owner: kibana
+    group: kibana
+    mode: 0664
+  with_items: "{{ bundle_files.files }}"

@@ -1,0 +1,5 @@
+- name: Install
+  yum:
+    state: present
+    name: "{{ item.path }}"
+  with_items: "{{ packages }}"

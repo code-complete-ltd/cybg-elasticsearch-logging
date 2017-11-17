@@ -1,0 +1,13 @@
+- name: Get multiple package stats
+  stat:
+    path: "{{ item.path }}"
+  register: packages_stats
+  with_items: "{{ packages }}"
+
+- name: Download multiple packages
+  get_url:
+    url: "{{ item.item.url }}"
+    dest: "{{ item.item.path }}"
+  check_mode: no
+  when: item.stat.exists == false or item.stat.checksum != item.item.checksum
+  with_items: "{{ packages_stats.results }}"

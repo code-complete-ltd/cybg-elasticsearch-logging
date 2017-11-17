@@ -1,0 +1,14 @@
+# Can't use Ansible pip module because of https://github.com/ansible/ansible/issues/29895.
+
+- name: Check if installed
+  shell: pip list | grep elasticsearch
+  register: elasticsearch_client_installed
+  changed_when: elasticsearch_client_installed.rc == 1
+  failed_when: elasticsearch_client_installed.rc > 1
+  check_mode: no
+
+- name: Install
+  command: pip install elasticsearch --no-index --find-links file:///tmp
+  register: elasticsearch_client_install
+  when: elasticsearch_client_installed.rc == 1
+  changed_when: elasticsearch_client_install.rc == 0

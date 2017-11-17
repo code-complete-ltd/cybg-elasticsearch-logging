@@ -1,0 +1,11 @@
+- import_tasks: download.yml
+
+- import_tasks: install.yml
+
+- import_tasks: config.yml
+
+- import_tasks: xpack.yml
+
+- meta: flush_handlers
+
+- import_tasks: run.yml

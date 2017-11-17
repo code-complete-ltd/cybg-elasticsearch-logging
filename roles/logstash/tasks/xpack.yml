@@ -1,0 +1,26 @@
+- name: Check if X-Pack is installed
+  shell: /usr/share/logstash/bin/logstash-plugin list | grep x-pack
+  register: xpack_installed
+  changed_when: xpack_installed.rc == 1
+  failed_when: xpack_installed.rc > 1
+  check_mode: no
+
+- name: Get X-Pack archive stats
+  stat:
+    path: "{{ xpack_archive_path }}"
+  register: xpack_archive
+  when: xpack_installed.rc == 1
+
+- name: Download X-Pack archive
+  get_url:
+    url: "{{ xpack_archive_url }}"
+    dest: "{{ xpack_archive_path }}"
+  check_mode: no
+  when: xpack_installed.rc == 1 and (xpack_archive.stat.exists == false or xpack_archive.stat.checksum != xpack_archive_checksum)
+
+- name: Install X-Pack
+  notify: Restart Logstash service
+  command: "/usr/share/logstash/bin/logstash-plugin install file://{{ xpack_archive_path }}"
+  register: xpack_install
+  changed_when: xpack_install.rc == 0
+  when: xpack_installed.rc == 1

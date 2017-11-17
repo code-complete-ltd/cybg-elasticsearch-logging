@@ -1,0 +1,5 @@
+- name: Run service
+  service:
+    state: "{{ logstash_enabled | ternary('started','stopped') }}"
+    name: logstash
+    enabled: "{{ logstash_enabled }}"

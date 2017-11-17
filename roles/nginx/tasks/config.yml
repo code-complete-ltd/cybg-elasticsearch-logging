@@ -1,0 +1,14 @@
+- name: Copy nginx.conf file
+  notify: Reload Nginx service
+  copy:
+    src: "{{ role_path }}/files/etc/nginx/nginx.conf"
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Remove default.conf file
+  notify: Reload Nginx service
+  file:
+    state: absent
+    path: /etc/nginx/conf.d/default.conf

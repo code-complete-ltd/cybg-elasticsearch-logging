@@ -1,0 +1,11 @@
+- name: Get package stats
+  stat:
+    path: "{{ elasticsearch_package_path }}"
+  register: elasticsearch_package
+
+- name: Download package
+  get_url:
+    url: "{{ elasticsearch_package_url }}"
+    dest: "{{ elasticsearch_package_path }}"
+  check_mode: no
+  when: elasticsearch_package.stat.exists == false or elasticsearch_package.stat.checksum != elasticsearch_package_checksum

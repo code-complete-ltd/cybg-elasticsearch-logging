@@ -1,0 +1,12 @@
+- name: Kibana
+  hosts: kibana
+  roles:
+    - kibana
+
+# If Kibana is to be installed on separate servers, set the elasticsearch_client_only var to yes.
+# - name: Kibana
+#   hosts: kibana
+#   roles:
+#     - kibana
+#   vars:
+#     elasticsearch_client_only: yes

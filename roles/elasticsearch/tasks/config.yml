@@ -1,0 +1,20 @@
+- name: Copy multiple templates
+  notify: Restart Elasticsearch service
+  template:
+    src: "{{ role_path }}/templates/etc/elasticsearch/{{ item }}.j2"
+    dest: "/etc/elasticsearch/{{ item }}"
+    owner: root
+    group: elasticsearch
+    mode: 0660
+  with_items:
+    - elasticsearch.yml
+    - jvm.options
+
+- name: Copy override.conf template
+  notify: Reload Elasticsearch daemon
+  template:
+    src: "{{ role_path }}/templates/etc/systemd/system/elasticsearch.service.d/override.conf.j2"
+    dest: /etc/systemd/system/elasticsearch.service.d/override.conf
+    owner: root
+    group: root
+    mode: 0644

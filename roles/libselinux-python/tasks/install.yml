@@ -1,0 +1,4 @@
+- name: Install
+  yum:
+    name: "{{ libselinux_python_package_url }}"
+  when: ( ansible_distribution == "CentOS" ) and ( ansible_distribution_major_version == "6" )

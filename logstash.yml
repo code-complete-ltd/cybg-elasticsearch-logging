@@ -1,0 +1,4 @@
+- name: Logstash
+  hosts: logstash
+  roles:
+    - logstash

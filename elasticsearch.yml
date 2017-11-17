@@ -1,0 +1,5 @@
+- name: Elasticsearch
+  hosts: elasticsearch
+  roles:
+    - elasticsearch
+    - python-elasticsearch
