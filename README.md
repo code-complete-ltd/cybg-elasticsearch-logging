@@ -1,0 +1,1 @@
+# cybg-elasticsearch-logging
