@@ -12,7 +12,7 @@
 
 - name: Load source Flume template
   set_fact:
-    source_flume_template: "{{ lookup('file', role_path + '/artifacts/flume.json') | from_json }}"
+    source_flume_template: "{{ lookup('file', role_path + '/files/tmp/flume.json') | from_json }}"
   when: inventory_hostname == groups["elasticsearch"][0]
 
 - name: Upload Flume template

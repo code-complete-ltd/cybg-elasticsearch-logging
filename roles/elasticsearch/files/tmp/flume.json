@@ -1,7 +1,5 @@
 {
-  "order": 0,
   "template": "flume-*",
-  "settings": {},
   "mappings": {
     "_default_": {
       "dynamic_templates": [
